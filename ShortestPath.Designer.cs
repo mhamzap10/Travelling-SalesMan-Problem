@@ -39,11 +39,13 @@
             this.Distance = new System.Windows.Forms.TextBox();
             this.Time = new System.Windows.Forms.TextBox();
             this.Cost = new System.Windows.Forms.TextBox();
-            this.Boy = new System.Windows.Forms.TextBox();
+            this.DBoy = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -142,13 +144,13 @@
             this.Cost.Size = new System.Drawing.Size(170, 20);
             this.Cost.TabIndex = 10;
             // 
-            // Boy
+            // DBoy
             // 
-            this.Boy.Location = new System.Drawing.Point(517, 373);
-            this.Boy.Name = "Boy";
-            this.Boy.ReadOnly = true;
-            this.Boy.Size = new System.Drawing.Size(170, 20);
-            this.Boy.TabIndex = 11;
+            this.DBoy.Location = new System.Drawing.Point(517, 373);
+            this.DBoy.Name = "DBoy";
+            this.DBoy.ReadOnly = true;
+            this.DBoy.Size = new System.Drawing.Size(170, 20);
+            this.DBoy.TabIndex = 11;
             // 
             // label3
             // 
@@ -186,16 +188,38 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Delivery Boy";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(184, 422);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(147, 39);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Reset";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(405, 422);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(147, 39);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "Add Delivery Boy";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // ShortestPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(802, 473);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.Boy);
+            this.Controls.Add(this.DBoy);
             this.Controls.Add(this.Cost);
             this.Controls.Add(this.Time);
             this.Controls.Add(this.Distance);
@@ -227,10 +251,12 @@
         private System.Windows.Forms.TextBox Distance;
         private System.Windows.Forms.TextBox Time;
         private System.Windows.Forms.TextBox Cost;
-        private System.Windows.Forms.TextBox Boy;
+        private System.Windows.Forms.TextBox DBoy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
