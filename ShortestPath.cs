@@ -8,11 +8,14 @@ namespace Travelling_SalesMan_Problem
 {
     public partial class ShortestPath : Form
     {
+        int interval = 1;
+        string receiver = "";
         int check = 0;
-        double speed = 50;
-        float costPerKm = 4;
+       public static double speed = 50;
+        public static float costPerKm = 4;
        static DynamicQueue boy = new DynamicQueue();
         ArrayList Address = new ArrayList();
+        
         public ShortestPath()
         {
             InitializeComponent();
@@ -24,19 +27,12 @@ namespace Travelling_SalesMan_Problem
         }
         private void printShortestRoute(Route shortestRoute)
         {
-            
-            Console.WriteLine("Shortest route found so far is :{" + new NearestNeighbour(this).getCitiesName(shortestRoute.getCities()) + "}");
-            Console.WriteLine(" w/ Total distance : " + shortestRoute.calculateTotalDistance() + " miles");
             ArrayList city = shortestRoute.getCities();
             City final = (City)city[city.Count - 1];
-            double distance = (shortestRoute.calculateTotalDistance() * 1.609)+ final.measureDistance((City)city[0]);
+            double distance = (shortestRoute.calculateTotalDistance() * 1.609)+ final.measureDistance(new City("Bahria University", 24.893277, 67.08818145));
             Distance.Text = distance.ToString("0.##") + " Km";
             Time.Text = ((distance / speed)+0.5).ToString("0.##") +" hrs";
             Cost.Text = "Rs "+(costPerKm * distance).ToString("0.##");
-
-
-
-            //Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         }
         public double[] geData(string Name)
         {
@@ -82,6 +78,13 @@ namespace Travelling_SalesMan_Problem
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            if(interval == 1)
+            {
+                Timer.Enabled = true;
+                Timer.Start();
+                RouteTimer.Enabled = true;
+                RouteTimer.Start();
+            }
             double[] data = getData(Area.Text.ToLower());
             if (data[0] == -1)
                 MessageBox.Show("Area Not Found. Make sure you have write correct spellings");
@@ -107,7 +110,6 @@ namespace Travelling_SalesMan_Problem
         {
             if (check == 0)
             {
-                Timer();
                 StreamReader reader = new StreamReader(@"DeliveryBoy.csv");
                 while (!reader.EndOfStream)
                 {
@@ -116,7 +118,6 @@ namespace Travelling_SalesMan_Problem
                     {
                         string[] values = line.Split(',');
                         boy.Enque(new DeliveryBoy(int.Parse(values[0]), values[1].ToString(), values[2].ToString()));
-                        Console.WriteLine("Hello");
                     }
                 }
                 check = -1;
@@ -127,13 +128,17 @@ namespace Travelling_SalesMan_Problem
                 DBoy.Text = "No DeliveryBoy Present at The Moment";
                 return;
             }
-            DBoy.Text = boy.Deque().getName();
+            DeliveryBoy temp = boy.Deque();
+            DBoy.Text = temp.getName();
+            receiver = temp.getEmail();
         }
         private void FindRoute()
         {
             Route route = new Route(Address);
             setDeliveryBoy();
             printShortestRoute(new NearestNeighbour(this).FindShortestRoute(Address));
+            RouteTimer.Stop();
+            Timer.Stop();
         }
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -149,28 +154,57 @@ namespace Travelling_SalesMan_Problem
             Cost.Text = null;
             Time.Text = null;
             DBoy.Text = null;
+            interval = 0;
+            Timer.Stop();
+            second.Text = "0";
+            RouteTimer.Stop();
         }
-        private void Timer()
-        {
-            Timer timer1 = new Timer
-            {
-                Interval = 30000
-            };
-            timer1.Enabled = true;
-            timer1.Tick += new System.EventHandler(OnTimerEvent);
-        }
-        private void OnTimerEvent(object sender, EventArgs e)
-        {
-            FindRoute();
-        }
+        
         private void button4_Click(object sender, EventArgs e)
         {
           new InsertBoy().ShowDialog();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new Email().SendEmail(receiver, output.Text + "\n Distance: " + Distance.Text + "\n Expected Cost: " + Cost.Text+"\n Expected Time: "+Time.Text);
+            MessageBox.Show("Email Send Successfully");
+        }
+
+        private void Timer_Tick_1(object sender, EventArgs e)
+        {
+            interval++;
+            second.Text = interval.ToString();
+        }
+
+        private void RouteTimer_Tick(object sender, EventArgs e)
         {
             FindRoute();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            new Settings().ShowDialog();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Timer.Start();
+            RouteTimer.Start();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Timer.Stop();
+            RouteTimer.Stop();
+        }
+        public void NoInternet()
+        {
+            MessageBox.Show("No Internet Connection");
+        }
+        private void ShortestPath_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

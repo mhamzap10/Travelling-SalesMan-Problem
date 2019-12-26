@@ -44,5 +44,10 @@ namespace Travelling_SalesMan_Problem
         {
             this.Dispose();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

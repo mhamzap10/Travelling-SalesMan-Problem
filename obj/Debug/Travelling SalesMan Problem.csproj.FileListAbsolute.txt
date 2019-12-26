@@ -7,3 +7,4 @@ D:\hamza\assignment\3rd Semester\DSA Projects\Travelling SalesMan Problem\obj\De
 D:\hamza\assignment\3rd Semester\DSA Projects\Travelling SalesMan Problem\obj\Debug\Travelling SalesMan Problem.exe
 D:\hamza\assignment\3rd Semester\DSA Projects\Travelling SalesMan Problem\obj\Debug\Travelling SalesMan Problem.pdb
 D:\hamza\assignment\3rd Semester\DSA Projects\Travelling SalesMan Problem\obj\Debug\Travelling_SalesMan_Problem.InsertBoy.resources
+D:\hamza\assignment\3rd Semester\DSA Projects\Travelling SalesMan Problem\obj\Debug\Travelling_SalesMan_Problem.Settings.resources

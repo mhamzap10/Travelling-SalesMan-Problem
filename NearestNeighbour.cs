@@ -18,16 +18,7 @@ namespace Travelling_SalesMan_Problem
         public Route FindShortestRoute(ArrayList cities)//calculate the total distance 
         {
             ArrayList ShortestRouteCities = new ArrayList();
-            Console.WriteLine("");
-            Console.WriteLine("                 ***************  TRAVELLING SALESMAN PROBLEM *****************");
-            Console.WriteLine("");
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Initial route     ==> " + getCitiesName(cities));
-            Console.WriteLine(" w/ Total Distance Between All Cities :" + new Route(cities).calculateTotalDistance() + " miles");
-            Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("");
-
-            City city = (City)cities[0];// cities will be picked from here
+            City city = new City("Bahria University", 24.893277, 67.08818145);// cities will be picked from here
 
             updatesRoutes(ShortestRouteCities, cities, city);
             while (cities.Count >= 1)
@@ -38,17 +29,6 @@ namespace Travelling_SalesMan_Problem
             printShortestRout(ShortestRouteCities);
             return new Route(ShortestRouteCities);
         }
-        public string getCitiesName(ArrayList cities)// it provide list of cities in the form of String
-        {
-            string result = null;
-            foreach (City city in cities)// iterrate on cities to print next name of city
-            {
-                result += city.getName() + ",";
-
-            }
-
-            return result;
-        }
         private void printShortestRout(ArrayList shortestRouteCities)
         {
             this.display.output.Text = null;
@@ -56,17 +36,12 @@ namespace Travelling_SalesMan_Problem
             {
                 this.display.output.Text = this.display.output.Text + city.getName() + "\n";
             }
-            City end = (City)shortestRouteCities[0];
-            this.display.output.Text = this.display.output.Text + end.getName() + "\n";
+            this.display.output.Text = this.display.output.Text + "Bahria University" + "\n";
         }
         private void updatesRoutes(ArrayList shortestRouteCities, ArrayList cities, City city)//we update the list after picking any city from the list
         {
             shortestRouteCities.Add(city);
             cities.Remove(city);
-
-            Console.WriteLine("Cities in shortest route   ==> {" + getCitiesName(shortestRouteCities) + "}");
-            //Console.WriteLine("Remaining cities    ==> {" + getCitiesName(cities) + "}");
-            Console.WriteLine("");
         }
 
         private City getNextCity(ArrayList cities, City city) // find the minimum distance from list of cities and pick the city with minimum distance.
@@ -86,8 +61,6 @@ namespace Travelling_SalesMan_Problem
                 }
             }
             return (City)cities[min_index];
-
-
         }
     }
 }
